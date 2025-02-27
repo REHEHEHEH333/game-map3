@@ -3,24 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Map</title>
+  <title>Interactive Game Map</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+
+  <!-- Custom styles for the map -->
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #222;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
+    #map {
+      height: 100vh; /* Full height for the map */
+      width: 100%;   /* Full width for the map */
     }
   </style>
 </head>
 <body>
-  <img src="CRP-SonoranEntry.png" alt="Game Map">
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+  <!-- Initialize the map -->
+  <script>
+    // Create the map
+    const map = L.map('map', {
+      crs: L.CRS.Simple // Use simple coordinate system for images
+    });
+
+    // Define the bounds of the image (adjust based on your image dimensions)
+    const bounds = [[0, 0], [1024, 1024]]; // Assuming the PNG is 1024x1024 pixels
+
+    // Add the image overlay
+    L.imageOverlay('CRP-SonoranEntry.png', bounds).addTo(map);
+
+    // Fit the map view to the bounds of the image
+    map.fitBounds(bounds);
+
+    // Example: Add a marker on the map
+    L.marker([512, 512]) // Center point (adjust as needed)
+      .addTo(map)
+      .bindPopup("Welcome to Sonoran Entry!")
+      .openPopup();
+  </script>
 </body>
 </html>
