@@ -33,13 +33,15 @@
     // Define the bounds of the image (adjust based on your image dimensions)
     const bounds = [[0, 0], [1024, 1024]]; // Assuming the PNG is 1024x1024 pixels
 
-    // Add the image overlay
-    L.imageOverlay('CRP-SonoranEntry.png', bounds).addTo(map);
+    // Add the image overlay with interactive mode to prevent blur
+    L.imageOverlay('CRP-SonoranEntry.png', bounds, {
+      interactive: true // Enable interaction to help with sharpness
+    }).addTo(map);
 
     // Fit the map view to the bounds of the image
     map.fitBounds(bounds);
 
-    // Example: Add a marker on the map
+    // Example: Add a marker on the map (optional, you can add more as needed)
     L.marker([512, 512]) // Center point (adjust as needed)
       .addTo(map)
       .bindPopup("Welcome to Sonoran Entry!")
@@ -47,3 +49,4 @@
   </script>
 </body>
 </html>
+
